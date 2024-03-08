@@ -1,35 +1,28 @@
 pipeline {
     agent any
-    
     stages {
         stage('Build') {
             steps {
-                script {
-                    // Compile the .cpp file using shell script
-                    sh 'g++ -o output_file hello1.cpp'
-                }
+                    build 'PES1UG21CS621-1'
+                    sh 'g++ hello1.cpp -o output'
             }
         }
         
         stage('Test') {
             steps {
-                script {
-                    // Print output of .cpp file using shell script
-                    sh './output_file'
-                }
+                    sh './outp'
             }
         }
         
         stage('Deploy') {
             steps {
-                // Add deployment steps if applicable
+                  echo "deploy"
             }
         }
-    }
-    
-    post {
-        failure {
-            echo 'Pipeline failed'
-        }
+      }
+      post{
+          failure{
+            error 'pipeline failed'
+          }
     }
 }
